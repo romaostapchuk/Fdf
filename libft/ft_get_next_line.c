@@ -53,7 +53,7 @@ int		ft_init(char *buffs[4096])
 	return (1);
 }
 
-int		get_next_line(const int fd, char **line)
+int		ft_get_next_line(const int fd, char **line)
 {
 	static char		*buffs[4096];
 	int				ret;

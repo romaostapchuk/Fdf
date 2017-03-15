@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rostapch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/17 17:03:56 by rostapch          #+#    #+#             */
-/*   Updated: 2017/01/17 17:03:57 by rostapch         ###   ########.fr       */
+/*   Created: 2017/03/15 14:22:22 by rostapch          #+#    #+#             */
+/*   Updated: 2017/03/15 14:22:26 by rostapch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "mlx.h"
+#include "math.h"
+#include "libft.h"
+#include "get_next_line.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <fcntl.h>
 
-# define BUFF_SIZE 20
-
-# include <fcntl.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include "libft.h"
-
-int		ft_get_next_line(const int fd, char **line);
-
-#endif
+void	DrawLine(double *xy1, double *xy2, void *mlx, void *wnd);
+int		ReadFile(char *file);
