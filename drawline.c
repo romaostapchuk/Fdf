@@ -12,6 +12,31 @@
 
 #include "fdf.h"
 
+int		*MatrixVector3(int x, int y, int z, int **mtrx)
+{
+	int i;
+	int j;
+	int xyz[4];
+	int ret[4]
+
+	xyz = {x, y, z, 1};
+	i = -1;
+	while (++i < 4)
+	{
+		j = -1;
+		while (++j < 4)
+		{
+			ret[i] += mtrx[i][j] * xyz[j];
+		}
+	}
+	return (ret);
+}
+
+void	Tab_3d_2d(int **tab, int x, int y)
+{
+
+}
+
 void	DrawLine(double *xy1, double *xy2, void *mlx, void *wnd)
 {
 	double x;

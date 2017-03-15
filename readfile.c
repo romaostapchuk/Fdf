@@ -39,6 +39,7 @@ void	ft_fill_int_tab(int x, int y, int fd, char *file)
 		ft_fill(line, z[i]);
 		i++;
 	}
+	Tab_3d_2d(z, x, y);
 }
 
 int		ft_words(char *str)

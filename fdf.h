@@ -20,3 +20,4 @@
 
 void	DrawLine(double *xy1, double *xy2, void *mlx, void *wnd);
 int		ReadFile(char *file);
+void	Tab_3d_2d(int **tab, int x, int y);
