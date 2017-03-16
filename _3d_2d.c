@@ -12,14 +12,12 @@
 
 #include "fdf.h"
 
-int		*MatrixVector3(int x, int y, int z, int **mtrx)
+void	matrix_vector3(double xyz[4], double **mtrx)
 {
-	int i;
-	int j;
-	int xyz[4];
-	int ret[4]
+	int		i;
+	int		j;
+	double	ret[4];
 
-	xyz = {x, y, z, 1};
 	i = -1;
 	while (++i < 4)
 	{
@@ -29,37 +27,50 @@ int		*MatrixVector3(int x, int y, int z, int **mtrx)
 			ret[i] += mtrx[i][j] * xyz[j];
 		}
 	}
-	return (ret);
+	xyz[0] = ret[0] / ret[3];
+	xyz[1] = ret[1] / ret[3];
 }
 
-void	Tab_3d_2d(int **tab, int x, int y)
+void	init_xy(double ****xy, int x, int y)
 {
+	int i;
+	int j;
 
+	(*xy) = (double ***)malloc(sizeof(double **) * y);
+	i = -1;
+	while (++i < y)
+	{
+    	(*xy)[i] = (double **)malloc(sizeof(double *) * x);
+    	j = -1;
+    	while (++j < x)
+    		(*xy)[i][j] = (double *)malloc(sizeof(double) * 2);
+	}
 }
 
-void	DrawLine(double *xy1, double *xy2, void *mlx, void *wnd)
+void	tab_3d_2d(double **tab, int x, int y, int projection)
 {
-	double x;
-	double y;
-
-	if (fabs(xy2[0] - xy1[0]) > fabs(xy2[1] - xy1[1]))
+	double	***xy;
+	double	xyz[4];
+	int		i;
+	int		j;
+	
+	init_xy(&xy, x, y);
+	i = -1;
+	while (++i < y)
 	{
-		y = fmin(xy1[1], xy2[1]);
-		x = fmin(xy1[0] - 1, xy2[0] - 1);
-		while (++x <= fmax(xy2[0], xy1[0]))
+		j = -1;
+		while (++j < x)
 		{
-			mlx_pixel_put(mlx, wnd, x, y, 0x00FFFFFF);
-			y = (xy2[1] - xy1[1]) / (xy2[0] - xy1[0]) * (x - xy1[0]) + xy1[1];
+			xyz[0] = j * 10;
+			xyz[1] = i * 10;
+			xyz[2] = tab[i][j];
+			xyz[3] = 1;
+			printf("----->%f_%f_%f\n", xyz[0],xyz[1], xyz[2]);
+			matrix_vector3(xyz, matrix(projection));
+			xy[i][j][0] = xyz[0] + WINDOW_WIDTH;
+			xy[i][j][1] = xyz[1] + WINDOW_HEIGHT;
+			printf("=======%f_%f_%f_%f\n", xyz[0],xyz[1], xyz[2], xyz[3]);
 		}
 	}
-	else
-	{
-		y = fmin(xy1[1] - 1, xy2[1] - 1);
-		x = fmin(xy1[0], xy2[0]);
-		while (++y <= fmax(xy2[1], xy1[1]))
-		{
-			mlx_pixel_put(mlx, wnd, x, y, 0x00FFFFFF);
-			x = (xy2[0] - xy1[0]) / (xy2[1] - xy1[1]) * (y - xy1[1]) + xy1[0];
-		}
-	}
+	draw_field(xy, x, y);
 }

@@ -12,7 +12,7 @@
 
 #include "fdf.h"
 
-void	ft_fill(char *str, int *tab_row)
+void	ft_fill(char *str, double *tab_row)
 {
 	char **arr;
 	int i;
@@ -26,12 +26,16 @@ void	ft_fill(char *str, int *tab_row)
 			tab_row[++j] = ft_atoi(arr[i]);
 }
 
-void	ft_fill_int_tab(int x, int y, int fd, char *file)
+void	ft_fill_int_tab(int x, int y, int fd, char *file, int prj)
 {
 	char	*line;
-	int		z[y][x];
+	double	**z;
 	int		i;
-
+	
+	z = (double **)malloc(sizeof(double *) * y);
+	i = -1;
+	while (++i < y)
+    	z[i] = (double *)malloc(sizeof(double) * x);
 	fd = open(file, O_RDONLY);
 	i = 0;
 	while (ft_get_next_line(fd, &line) > 0)
@@ -39,7 +43,7 @@ void	ft_fill_int_tab(int x, int y, int fd, char *file)
 		ft_fill(line, z[i]);
 		i++;
 	}
-	Tab_3d_2d(z, x, y);
+	tab_3d_2d(z, x, y, prj);
 }
 
 int		ft_words(char *str)
@@ -58,7 +62,7 @@ int		ft_words(char *str)
 	return (wrd);
 }
 
-int		ReadFile(char *file)
+int		read_file(char *file, char *projection)
 {
 	int		fd;
 	char	*line;
@@ -69,16 +73,18 @@ int		ReadFile(char *file)
 	x = 0;
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
-	{
-		perror("Error opening file");
-		return (-1);
-	}
+		error_exit(-1);
 	while (ft_get_next_line(fd, &line) > 0)
 	{
 		x = fmax(x, ft_words(line));
 		y++;
 	}
-	ft_fill_int_tab(x, y, fd, file);
+	if (ft_strcmp(projection, "cabinet") == 0)
+		ft_fill_int_tab(x, y, fd, file, 1);
+	else if (ft_strcmp(projection, "iso") == 0)
+		ft_fill_int_tab(x, y, fd, file, 2);
+	else
+		error_exit(2);
 	close(fd);
 	return (0);
 }
