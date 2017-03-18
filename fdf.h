@@ -10,6 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef _DFD_H_
+# define _DFD_H_
+
 #include "mlx.h"
 #include "math.h"
 #include "libft.h"
@@ -31,7 +34,8 @@ typedef struct	window
 double	**matrix(int mtrx);
 void	draw_line(double *xy1, double *xy2, void *mlx, void *wnd);
 int		read_file(char *file, char *projection);
-void	tab_3d_2d(double **tab, int x, int y, int projection);
+void	tab_3d_2d(double **tab, int *xy, int projection);
 void	error_exit(int err);
 void	get_window(int init, void **mlx, void **wnd);
 void	draw_field(double ***tab, int x, int y);
+#endif

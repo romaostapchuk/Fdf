@@ -43,23 +43,23 @@ void	init_xy(double ****xy, int x, int y)
     	(*xy)[i] = (double **)malloc(sizeof(double *) * x);
     	j = -1;
     	while (++j < x)
-    		(*xy)[i][j] = (double *)malloc(sizeof(double) * 2);
+    		(*xy)[i][j] = (double *)malloc(sizeof(double) * 3);
 	}
 }
 
-void	tab_3d_2d(double **tab, int x, int y, int projection)
+void	tab_3d_2d(double **tab, int *xy, int projection)
 {
-	double	***xy;
+	double	***xy_field;
 	double	xyz[4];
 	int		i;
 	int		j;
 	
-	init_xy(&xy, x, y);
+	init_xy(&xy_field, xy[0], xy[1]);
 	i = -1;
-	while (++i < y)
+	while (++i < xy[1])
 	{
 		j = -1;
-		while (++j < x)
+		while (++j < xy[0])
 		{
 			xyz[0] = j * 10;
 			xyz[1] = i * 10;
@@ -67,9 +67,10 @@ void	tab_3d_2d(double **tab, int x, int y, int projection)
 			xyz[3] = 1;
 			malloc(0);
 			matrix_vector3(xyz, matrix(projection));
-			xy[i][j][0] = xyz[0] + WINDOW_WIDTH;
-			xy[i][j][1] = xyz[1] + WINDOW_HEIGHT;
+			xy_field[i][j][0] = xyz[0] + WINDOW_WIDTH;
+			xy_field[i][j][1] = xyz[1] + WINDOW_HEIGHT;
+			xy_field[i][j][2] = tab[i][j];
 		}
 	}
-	draw_field(xy, x, y);
+	draw_field(xy_field, xy[0], xy[1]);
 }

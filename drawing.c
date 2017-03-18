@@ -31,7 +31,7 @@ void	draw_line(double *xy1, double *xy2, void *mlx, void *wnd)
 		y = min_of_2(xy1[0], xy2[0]) == 0 ? xy1[1] : xy2[1];
 		while (x <= fmax(xy2[0], xy1[0]))
 		{
-			mlx_pixel_put(mlx, wnd, x, y, 0x00FFFFFF);
+			mlx_pixel_put(mlx, wnd, x, y, 255);
 			y = (xy2[1] - xy1[1]) / (xy2[0] - xy1[0]) * (x - xy1[0]) + xy1[1];
 			x++;
 		}
@@ -41,7 +41,7 @@ void	draw_line(double *xy1, double *xy2, void *mlx, void *wnd)
 		x = min_of_2(xy1[1], xy2[1]) == 0 ? xy1[0] : xy2[0];
 		while (y <= fmax(xy2[1], xy1[1]))
 		{
-			mlx_pixel_put(mlx, wnd, x, y, 0x00FFFFFF);
+			mlx_pixel_put(mlx, wnd, x, y, 16711680);
 			x = (xy2[0] - xy1[0]) / (xy2[1] - xy1[1]) * (y - xy1[1]) + xy1[0];
 			y++;
 		}
