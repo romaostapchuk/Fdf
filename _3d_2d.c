@@ -65,11 +65,10 @@ void	tab_3d_2d(double **tab, int x, int y, int projection)
 			xyz[1] = i * 10;
 			xyz[2] = tab[i][j];
 			xyz[3] = 1;
-			printf("----->%f_%f_%f\n", xyz[0],xyz[1], xyz[2]);
+			malloc(0);
 			matrix_vector3(xyz, matrix(projection));
 			xy[i][j][0] = xyz[0] + WINDOW_WIDTH;
 			xy[i][j][1] = xyz[1] + WINDOW_HEIGHT;
-			printf("=======%f_%f_%f_%f\n", xyz[0],xyz[1], xyz[2], xyz[3]);
 		}
 	}
 	draw_field(xy, x, y);

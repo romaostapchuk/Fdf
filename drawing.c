@@ -14,8 +14,8 @@
 
 void	draw_line(double *xy1, double *xy2, void *mlx, void *wnd)
 {
-	double x;
-	double y;
+	int x;
+	int y;
 
 	if (fabs(xy2[0] - xy1[0]) > fabs(xy2[1] - xy1[1]))
 	{
@@ -25,6 +25,7 @@ void	draw_line(double *xy1, double *xy2, void *mlx, void *wnd)
 		{
 			mlx_pixel_put(mlx, wnd, x, y, 0x00FFFFFF);
 			y = (xy2[1] - xy1[1]) / (xy2[0] - xy1[0]) * (x - xy1[0]) + xy1[1];
+			//printf("<%d><%d>  _", x, y);
 		}
 	}
 	else
@@ -35,8 +36,10 @@ void	draw_line(double *xy1, double *xy2, void *mlx, void *wnd)
 		{
 			mlx_pixel_put(mlx, wnd, x, y, 0x00FFFFFF);
 			x = (xy2[0] - xy1[0]) / (xy2[1] - xy1[1]) * (y - xy1[1]) + xy1[0];
+			//printf("<%d><%d>  _", x, y);
 		}
 	}
+			//printf("\n");
 }
 
 void	draw_field(double ***tab, int x, int y)
