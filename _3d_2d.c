@@ -1,16 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   drawline.c                                         :+:      :+:    :+:   */
+/*   _3d_2d.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rostapch <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rostapch <rostapch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 14:21:21 by rostapch          #+#    #+#             */
-/*   Updated: 2017/03/15 14:21:22 by rostapch         ###   ########.fr       */
+/*   Updated: 2017/03/24 19:26:58 by rostapch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+int		min_of_2(double a, double b)
+{
+	if (a <= b)
+		return (0);
+	return (1);
+}
 
 void	matrix_vector3(double xyz[4], double **mtrx)
 {
@@ -63,7 +70,7 @@ void	tab_3d_2d(double **tab, int *xy, int projection)
 		{
 			xyz[0] = j * 10;
 			xyz[1] = i * 10;
-			xyz[2] = tab[i][j];
+			xyz[2] = tab[i][j] * 1;
 			xyz[3] = 1;
 			malloc(0);
 			matrix_vector3(xyz, matrix(projection));

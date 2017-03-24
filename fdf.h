@@ -32,10 +32,11 @@ typedef struct	window
 }				Window;
 
 double	**matrix(int mtrx);
-void	draw_line(double *xy1, double *xy2, void *mlx, void *wnd);
+void	draw_line(double *xy1, double *xy2, void *mlx, void *wnd, double *mm_z);
 int		read_file(char *file, char *projection);
 void	tab_3d_2d(double **tab, int *xy, int projection);
 void	error_exit(int err);
 void	get_window(int init, void **mlx, void **wnd);
 void	draw_field(double ***tab, int x, int y);
+int		min_of_2(double a, double b);
 #endif

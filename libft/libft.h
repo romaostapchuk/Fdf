@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ichubare <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rostapch <rostapch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 14:51:39 by ichubare          #+#    #+#             */
-/*   Updated: 2017/01/28 17:15:24 by rostapch         ###   ########.fr       */
+/*   Updated: 2017/03/24 19:03:07 by rostapch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,5 @@ t_list				*ft_lstget_node(t_list *start, size_t pos);
 int					ft_isspace(int ch);
 char				*ft_strdup(const char *s1);
 char				*ft_strjoin(char *s1, char *s2);
+int					ft_rgb(int red, int green, int blue);
 #endif
