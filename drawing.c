@@ -6,7 +6,7 @@
 /*   By: rostapch <rostapch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 16:44:35 by rostapch          #+#    #+#             */
-/*   Updated: 2017/03/27 18:54:46 by rostapch         ###   ########.fr       */
+/*   Updated: 2017/03/27 20:40:48 by rostapch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ double	arr_min(double ***arr, int id, int x, int y)
 	return (min);
 }
 
-int		color_grad(double *xyz1, double *xyz2, int x, int y, double *mm_z)
+int		color(double *xyz1, double *xyz2, int xy[2], double *mm_z)
 {
 	double	zs;
 	double	ze;
@@ -59,8 +59,8 @@ int		color_grad(double *xyz1, double *xyz2, int x, int y, double *mm_z)
 
 	zs = fabs((xyz1[2] - mm_z[0]) / fmax(mm_z[1] - mm_z[0], 0.001));
 	ze = fabs((xyz2[2] - mm_z[0]) / fmax(mm_z[1] - mm_z[0], 0.001));
-	zc = fabs(fmax((x - xyz1[0] + y - xyz1[1]) /
-		fmax(fabs(xyz2[0] - xyz1[0]) + fabs(xyz2[1] - xyz1[1]), 0.001), 0));
+	zc = fmax((fabs(xy[0] - xyz1[0]) + fabs(xy[1] - xyz1[1])) /
+		fmax(fabs(xyz2[0] - xyz1[0]) + fabs(xyz2[1] - xyz1[1]), 0.001), 0);
 	color = fabs((ze - zs) * zc) + fmin(zs, ze);
 	if (color >= 0 && color < 0.25)
 		return (ft_rgb(0, 255 * color * 4, 255));
@@ -75,56 +75,31 @@ int		color_grad(double *xyz1, double *xyz2, int x, int y, double *mm_z)
 
 void	draw_line(double *xy1, double *xy2, void *mlx, void *wnd, double *mm_z)
 {
-	int	x;
-	int	y;
+	int	p[2];
 
-	y = fmin(xy1[1], xy2[1]);
-	x = fmin(xy1[0], xy2[0]);
+	p[1] = fmin(xy1[1], xy2[1]);
+	p[0] = fmin(xy1[0], xy2[0]);
 	if (fabs(xy2[0] - xy1[0]) >= fabs(xy2[1] - xy1[1]))
 	{
-		y = min_of_2(xy1[0], xy2[0]) == 0 ? xy1[1] : xy2[1];
-		while (x <= fmax(xy2[0], xy1[0]))
+		p[1] = min_of_2(xy1[0], xy2[0]) == 0 ? xy1[1] : xy2[1];
+		while (p[0] <= fmax(xy2[0], xy1[0]))
 		{
-			mlx_pixel_put(mlx, wnd, x, y, color_grad(xy1, xy2, x, y, mm_z));
-			y = (xy2[1] - xy1[1]) / (xy2[0] - xy1[0]) * (x - xy1[0]) + xy1[1];
-			x++;
+			mlx_pixel_put(mlx, wnd, p[0], p[1], color(xy1, xy2, p, mm_z));
+			p[1] = (xy2[1] - xy1[1]) / (xy2[0] - xy1[0]) * (p[0] - xy1[0]) + xy1[1];
+			p[0]++;
 		}
 	}
 	else
 	{
-		x = min_of_2(xy1[1], xy2[1]) == 0 ? xy1[0] : xy2[0];
-		while (y <= fmax(xy2[1], xy1[1]))
+		p[0] = min_of_2(xy1[1], xy2[1]) == 0 ? xy1[0] : xy2[0];
+		while (p[1] <= fmax(xy2[1], xy1[1]))
 		{
-			mlx_pixel_put(mlx, wnd, x, y, color_grad(xy1, xy2, x, y, mm_z));
-			x = (xy2[0] - xy1[0]) / (xy2[1] - xy1[1]) * (y - xy1[1]) + xy1[0];
-			y++;
+			mlx_pixel_put(mlx, wnd, p[0], p[1], color(xy1, xy2, p, mm_z));
+			p[0] = (xy2[0] - xy1[0]) / (xy2[1] - xy1[1]) * (p[1] - xy1[1]) + xy1[0];
+			p[1]++;
 		}
 	}
 }
-
-/*void	draw_line(double *xy1, double *xy2, void *mlx, void *wnd, double *mm_z)
-{
-	int	x;
-	int	y;
-	double F;
-	int add;
-
-	y = min_of_2(xy1[2], xy2[2]) == 0 ? xy1[1] : xy2[1];
-	x = min_of_2(xy1[2], xy2[2]) == 0 ? xy1[0] : xy2[0];
-	F = (xy2[1] - xy1[1]) / (xy2[0] - xy1[0]);
-	if (min_of_2(xy1[2], xy2[2]) == 0 && xy1[0] < xy2[0])
-		add = 1;
-	else add = -1;
-	while (1 == 1)
-	{
-		mlx_pixel_put(mlx, wnd, x, y, color_grad(xy1, xy2, x, y, mm_z));
-			y = (xy2[1] - xy1[1]) / (xy2[0] - xy1[0]) * (x - xy1[0]) + xy1[1];
-		x += add;
-		if (x == round(min_of_2(xy1[2], xy2[2]) == 0 ? xy2[0] : xy1[0]) ||
-		y == round(min_of_2(xy1[2], xy2[2]) == 0 ? xy2[1] : xy1[1]))
-			break;
-	}
-}*/
 
 void	draw_field(double ***tab, int x, int y)
 {

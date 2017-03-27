@@ -6,7 +6,7 @@
 /*   By: rostapch <rostapch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 14:22:46 by rostapch          #+#    #+#             */
-/*   Updated: 2017/03/27 18:53:56 by rostapch         ###   ########.fr       */
+/*   Updated: 2017/03/27 20:24:55 by rostapch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ int		main(int argc, char **argv)
 	size[1] = 1;
 	if (argc == 5)
 	{
-		size[0] = ft_atoi(argv[3]);
-		size[1] = ft_atoi(argv[4]);
+		size[0] = ft_atoi(argv[3]) > 0 ? ft_atoi(argv[3]): 10;
+		size[1] = ft_atoi(argv[4]) > 0 ? ft_atoi(argv[4]): 1;
 	}
 	get_window(1, &mlx, &wnd);
 	if (argc >= 3)
