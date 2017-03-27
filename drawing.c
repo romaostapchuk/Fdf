@@ -6,7 +6,7 @@
 /*   By: rostapch <rostapch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 16:44:35 by rostapch          #+#    #+#             */
-/*   Updated: 2017/03/24 19:48:11 by rostapch         ###   ########.fr       */
+/*   Updated: 2017/03/27 17:06:40 by rostapch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int		color_grad(double *xyz1, double *xyz2, int x, int y, double *mm_z)
 	zs = fabs((xyz1[2] - mm_z[0]) / fmax(mm_z[1] - mm_z[0], 0.001));
 	ze = fabs((xyz2[2] - mm_z[0]) / fmax(mm_z[1] - mm_z[0], 0.001));
 	zc = fabs(fmax((x - xyz1[0] + y - xyz1[1]) /
-		fmax(xyz2[0] - xyz1[0] + xyz2[1] - xyz1[1], 0.001), 0));
+		fmax(fabs(xyz2[0] - xyz1[0]) + fabs(xyz2[1] - xyz1[1]), 0.001), 0));
 	color = fabs((ze - zs) * zc) + fmin(zs, ze);
 	if (color >= 0 && color < 0.25)
 		return (ft_rgb(0, 255 * color * 4, 255));
