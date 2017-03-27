@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rostapch <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rostapch <rostapch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 14:22:46 by rostapch          #+#    #+#             */
-/*   Updated: 2017/03/15 14:22:49 by rostapch         ###   ########.fr       */
+/*   Updated: 2017/03/27 18:53:56 by rostapch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,20 @@ int		main(int argc, char **argv)
 {
 	void	*mlx;
 	void	*wnd;
+	int		size[2];
 
 	mlx = mlx_init();
 	wnd = mlx_new_window(mlx, 2 * WINDOW_WIDTH, 2 * WINDOW_HEIGHT, "Fdf");
+	size[0] = 10;
+	size[1] = 1;
+	if (argc == 5)
+	{
+		size[0] = ft_atoi(argv[3]);
+		size[1] = ft_atoi(argv[4]);
+	}
 	get_window(1, &mlx, &wnd);
-	if (read_file(argv[1], argv[2]) < 0)
-		return (-1);
+	if (argc >= 3)
+		read_file(argv[1], argv[2], size);
 	mlx_key_hook(wnd, key_press, mlx);
 	mlx_loop(mlx);
 }

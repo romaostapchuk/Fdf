@@ -6,7 +6,7 @@
 /*   By: rostapch <rostapch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 14:21:21 by rostapch          #+#    #+#             */
-/*   Updated: 2017/03/24 19:26:58 by rostapch         ###   ########.fr       */
+/*   Updated: 2017/03/27 18:58:38 by rostapch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	init_xy(double ****xy, int x, int y)
 	}
 }
 
-void	tab_3d_2d(double **tab, int *xy, int projection)
+void	tab_3d_2d(double **tab, int *xy, int projection, int size[2])
 {
 	double	***xy_field;
 	double	xyz[4];
@@ -68,9 +68,9 @@ void	tab_3d_2d(double **tab, int *xy, int projection)
 		j = -1;
 		while (++j < xy[0])
 		{
-			xyz[0] = j * 10;
-			xyz[1] = i * 10;
-			xyz[2] = tab[i][j] * 1;
+			xyz[0] = j * size[0];
+			xyz[1] = i * size[0];
+			xyz[2] = tab[i][j] * size[1];
 			xyz[3] = 1;
 			malloc(0);
 			matrix_vector3(xyz, matrix(projection));

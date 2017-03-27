@@ -6,7 +6,7 @@
 /*   By: rostapch <rostapch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 16:44:35 by rostapch          #+#    #+#             */
-/*   Updated: 2017/03/27 17:06:40 by rostapch         ###   ########.fr       */
+/*   Updated: 2017/03/27 18:54:46 by rostapch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,6 @@ int		color_grad(double *xyz1, double *xyz2, int x, int y, double *mm_z)
 		return (ft_rgb(255 * (color - 0.5), 255, 0));
 	else if (color >= 0.75 && color <= 1)
 		return (ft_rgb(255, 255 - 255 * (color - 0.75) * 4, 0));
-
-	printf("%f_%f_%f_%f\n",zs, ze , zc, color);
 	return (0);
 }
 
@@ -103,6 +101,30 @@ void	draw_line(double *xy1, double *xy2, void *mlx, void *wnd, double *mm_z)
 		}
 	}
 }
+
+/*void	draw_line(double *xy1, double *xy2, void *mlx, void *wnd, double *mm_z)
+{
+	int	x;
+	int	y;
+	double F;
+	int add;
+
+	y = min_of_2(xy1[2], xy2[2]) == 0 ? xy1[1] : xy2[1];
+	x = min_of_2(xy1[2], xy2[2]) == 0 ? xy1[0] : xy2[0];
+	F = (xy2[1] - xy1[1]) / (xy2[0] - xy1[0]);
+	if (min_of_2(xy1[2], xy2[2]) == 0 && xy1[0] < xy2[0])
+		add = 1;
+	else add = -1;
+	while (1 == 1)
+	{
+		mlx_pixel_put(mlx, wnd, x, y, color_grad(xy1, xy2, x, y, mm_z));
+			y = (xy2[1] - xy1[1]) / (xy2[0] - xy1[0]) * (x - xy1[0]) + xy1[1];
+		x += add;
+		if (x == round(min_of_2(xy1[2], xy2[2]) == 0 ? xy2[0] : xy1[0]) ||
+		y == round(min_of_2(xy1[2], xy2[2]) == 0 ? xy2[1] : xy1[1]))
+			break;
+	}
+}*/
 
 void	draw_field(double ***tab, int x, int y)
 {

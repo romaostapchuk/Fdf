@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rostapch <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rostapch <rostapch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 14:22:22 by rostapch          #+#    #+#             */
-/*   Updated: 2017/03/15 14:22:26 by rostapch         ###   ########.fr       */
+/*   Updated: 2017/03/27 18:58:22 by rostapch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ typedef struct	window
 
 double	**matrix(int mtrx);
 void	draw_line(double *xy1, double *xy2, void *mlx, void *wnd, double *mm_z);
-int		read_file(char *file, char *projection);
-void	tab_3d_2d(double **tab, int *xy, int projection);
+int		read_file(char *file, char *projection, int size[2]);
+void	tab_3d_2d(double **tab, int *xy, int projection, int size[2]);
 void	error_exit(int err);
 void	get_window(int init, void **mlx, void **wnd);
 void	draw_field(double ***tab, int x, int y);
