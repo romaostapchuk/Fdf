@@ -6,7 +6,7 @@
 /*   By: rostapch <rostapch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 14:22:46 by rostapch          #+#    #+#             */
-/*   Updated: 2017/03/27 20:24:55 by rostapch         ###   ########.fr       */
+/*   Updated: 2017/03/28 17:19:42 by rostapch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ int		main(int argc, char **argv)
 	get_window(1, &mlx, &wnd);
 	if (argc >= 3)
 		read_file(argv[1], argv[2], size);
+	else
+		error_exit(3);
 	mlx_key_hook(wnd, key_press, mlx);
 	mlx_loop(mlx);
 }

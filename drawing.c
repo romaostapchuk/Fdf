@@ -6,7 +6,7 @@
 /*   By: rostapch <rostapch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 16:44:35 by rostapch          #+#    #+#             */
-/*   Updated: 2017/03/27 20:40:48 by rostapch         ###   ########.fr       */
+/*   Updated: 2017/03/28 18:38:19 by rostapch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int		color(double *xyz1, double *xyz2, int xy[2], double *mm_z)
 
 	zs = fabs((xyz1[2] - mm_z[0]) / fmax(mm_z[1] - mm_z[0], 0.001));
 	ze = fabs((xyz2[2] - mm_z[0]) / fmax(mm_z[1] - mm_z[0], 0.001));
+	if (zs > 0 && ze > 0)
 	zc = fmax((fabs(xy[0] - xyz1[0]) + fabs(xy[1] - xyz1[1])) /
 		fmax(fabs(xyz2[0] - xyz1[0]) + fabs(xyz2[1] - xyz1[1]), 0.001), 0);
 	color = fabs((ze - zs) * zc) + fmin(zs, ze);
@@ -70,36 +71,63 @@ int		color(double *xyz1, double *xyz2, int xy[2], double *mm_z)
 		return (ft_rgb(255 * (color - 0.5), 255, 0));
 	else if (color >= 0.75 && color <= 1)
 		return (ft_rgb(255, 255 - 255 * (color - 0.75) * 4, 0));
-	return (0);
+	return (ft_rgb(255, 255 , 255));
 }
 
-void	draw_line(double *xy1, double *xy2, void *mlx, void *wnd, double *mm_z)
+void	draw_line(double *a1, double *a2, void *mlx, void *wnd, double *mm_z)
 {
 	int	p[2];
 
-	p[1] = fmin(xy1[1], xy2[1]);
-	p[0] = fmin(xy1[0], xy2[0]);
-	if (fabs(xy2[0] - xy1[0]) >= fabs(xy2[1] - xy1[1]))
+	p[1] = fmin(a1[1], a2[1]);
+	p[0] = fmin(a1[0], a2[0]);
+	if (fabs(a2[0] - a1[0]) >= fabs(a2[1] - a1[1]))
 	{
-		p[1] = min_of_2(xy1[0], xy2[0]) == 0 ? xy1[1] : xy2[1];
-		while (p[0] <= fmax(xy2[0], xy1[0]))
+		p[1] = min_of_2(a1[0], a2[0]) == 0 ? a1[1] : a2[1];
+		while (p[0] <= fmax(a2[0], a1[0]))
 		{
-			mlx_pixel_put(mlx, wnd, p[0], p[1], color(xy1, xy2, p, mm_z));
-			p[1] = (xy2[1] - xy1[1]) / (xy2[0] - xy1[0]) * (p[0] - xy1[0]) + xy1[1];
+			mlx_pixel_put(mlx, wnd, p[0], p[1], color(a1, a2, p, mm_z));
+			p[1] = (a2[1] - a1[1]) / (a2[0] - a1[0]) * (p[0] - a1[0]) + a1[1];
 			p[0]++;
 		}
 	}
 	else
 	{
-		p[0] = min_of_2(xy1[1], xy2[1]) == 0 ? xy1[0] : xy2[0];
-		while (p[1] <= fmax(xy2[1], xy1[1]))
+		p[0] = min_of_2(a1[1], a2[1]) == 0 ? a1[0] : a2[0];
+		while (p[1] <= fmax(a2[1], a1[1]))
 		{
-			mlx_pixel_put(mlx, wnd, p[0], p[1], color(xy1, xy2, p, mm_z));
-			p[0] = (xy2[0] - xy1[0]) / (xy2[1] - xy1[1]) * (p[1] - xy1[1]) + xy1[0];
+			mlx_pixel_put(mlx, wnd, p[0], p[1], color(a1, a2, p, mm_z));
+			p[0] = (a2[0] - a1[0]) / (a2[1] - a1[1]) * (p[1] - a1[1]) + a1[0];
 			p[1]++;
 		}
 	}
 }
+
+/*void	draw_line(double *a1, double *a2, void *mlx, void *wnd, double *mm_z)
+{
+	int	p[2];
+	int add;
+
+	p[1] = min_of_2(a1[2], a2[2]) == 0 ? a1[1] : a2[1];
+	p[0] = min_of_2(a1[2], a2[2]) == 0 ? a1[0] : a2[0];
+	add = p[0] < fmax(a2[0], a1[0]) ? 1 : -1;
+	if (fabs(a2[0] - a1[0]) >= fabs(a2[1] - a1[1]))
+		while (p[0] <= fmax(a2[0], a1[0]) && p[0] >= fmin(a2[0], a1[0]))
+		{
+			mlx_pixel_put(mlx, wnd, p[0], p[1], color(a1, a2, p, mm_z));
+			p[1] = (a2[1] - a1[1]) / (a2[0] - a1[0]) * (p[0] - a1[0]) + a1[1];
+			p[0]+=add;
+		}
+	else
+	{
+		add = p[1] < fmax(a2[1], a1[1]) ? 1 : -1;
+		while (p[1] <= fmax(a2[1], a1[1]) && p[1] >= fmin(a2[1], a1[1]))
+		{
+			mlx_pixel_put(mlx, wnd, p[0], p[1], color(a1, a2, p, mm_z));
+			p[0] = (a2[0] - a1[0]) / (a2[1] - a1[1]) * (p[1] - a1[1]) + a1[0];
+			p[1]+=add;
+		}
+	}
+}*/
 
 void	draw_field(double ***tab, int x, int y)
 {
