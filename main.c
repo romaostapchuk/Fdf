@@ -6,7 +6,7 @@
 /*   By: rostapch <rostapch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 14:22:46 by rostapch          #+#    #+#             */
-/*   Updated: 2017/03/28 17:19:42 by rostapch         ###   ########.fr       */
+/*   Updated: 2017/04/01 19:41:14 by rostapch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int		main(int argc, char **argv)
 	int		size[2];
 
 	mlx = mlx_init();
-	wnd = mlx_new_window(mlx, 2 * WINDOW_WIDTH, 2 * WINDOW_HEIGHT, "Fdf");
+	wnd = mlx_new_window(mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "Fdf");
 	size[0] = 10;
 	size[1] = 1;
 	if (argc == 5)
