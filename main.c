@@ -6,7 +6,7 @@
 /*   By: rostapch <rostapch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 14:22:46 by rostapch          #+#    #+#             */
-/*   Updated: 2017/04/02 19:35:25 by rostapch         ###   ########.fr       */
+/*   Updated: 2017/04/02 19:49:47 by rostapch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,19 @@ void	resize(int zoom)
 	get_size(size, 0);
 	if (zoom == 1)
 	{
-		size[0] += 10;
-		size[1] += 1;
+		size[0] *= 2;
+		size[1] *= 2;
 		get_size(size, 1);
 		z = get_tab(z, xy, prj, 0);
-		tab_3d_2d(z, xy, prj, size);
+		tab_3d_2d(z, xy, get_projection(NULL, 0), size);
 	}
 	if (zoom == -1)
 	{
-		size[0] -= 10;
-		size[1] -= 1;
+		size[0] /= 2;
+		size[1] /= 2;
 		get_size(size, 1);
 		z = get_tab(z, xy, prj, 0);
-		tab_3d_2d(z, xy, prj, size);
+		tab_3d_2d(z, xy, get_projection(NULL, 0), size);
 	}
 }
 

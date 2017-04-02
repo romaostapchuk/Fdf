@@ -6,7 +6,7 @@
 /*   By: rostapch <rostapch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/02 18:29:19 by rostapch          #+#    #+#             */
-/*   Updated: 2017/04/02 19:23:39 by rostapch         ###   ########.fr       */
+/*   Updated: 2017/04/02 19:49:45 by rostapch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	get_size(int size[2], int init)
 {
 	static int	sz[2];
 
-	if (init > 0 && size[0] >= 10 && size[1] >= 1)
+	if (init > 0 && size[0] >= 1 && size[1] >= 1)
 	{
 		sz[0] = size[0];
 		sz[1] = size[1];
