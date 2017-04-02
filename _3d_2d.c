@@ -6,7 +6,7 @@
 /*   By: rostapch <rostapch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 14:21:21 by rostapch          #+#    #+#             */
-/*   Updated: 2017/04/01 19:41:09 by rostapch         ###   ########.fr       */
+/*   Updated: 2017/04/02 17:45:58 by rostapch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	init_xy(double ****xy, int x, int y)
 	}
 }
 
-void	tab_3d_2d(double **tab, int *xy, int projection, int size[2])
+void	tab_3d_2d(double **tab, int xy[2], int projection, int size[2])
 {
 	double	***xy_field;
 	double	xyz[4];

@@ -1,17 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   ft_get_next_line.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rostapch <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rostapch <rostapch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 17:03:48 by rostapch          #+#    #+#             */
-/*   Updated: 2017/01/17 17:03:52 by rostapch         ###   ########.fr       */
+/*   Updated: 2017/04/02 18:15:53 by rostapch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdio.h>
+
+char	*ft_strjoin_free(char *s1, char *s2)
+{
+	char	*arr;
+	size_t	i;
+
+	i = -1;
+	if (s1 && s2)
+	{
+		arr = (char*)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2)) + 1);
+		if (arr == NULL)
+			return (NULL);
+		while (s1[++i])
+			arr[i] = s1[i];
+		while (*s2)
+			arr[i++] = *s2++;
+		arr[i] = '\0';
+		ft_strdel(&s1);
+		return (arr);
+	}
+	return (NULL);
+}
 
 int		ft_split(char *buffs, char **line)
 {
@@ -22,7 +44,7 @@ int		ft_split(char *buffs, char **line)
 	if (pt)
 	{
 		temp = ft_strsub(buffs, 0, pt - buffs);
-		*line = ft_strjoin(*line, temp);
+		*line = ft_strjoin_free(*line, temp);
 		ft_strdel(&temp);
 		temp = ft_strdup(pt + 1);
 		ft_strclr(buffs);
@@ -32,7 +54,7 @@ int		ft_split(char *buffs, char **line)
 	}
 	else
 	{
-		*line = ft_strjoin(*line, buffs);
+		*line = ft_strjoin_free(*line, buffs);
 		ft_strclr(buffs);
 		return (0);
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrix.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rostapch <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rostapch <rostapch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 13:07:19 by rostapch          #+#    #+#             */
-/*   Updated: 2017/03/16 13:07:20 by rostapch         ###   ########.fr       */
+/*   Updated: 2017/04/02 18:07:43 by rostapch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ double	**izometric(void)
 
 double	**matrix(int mtrx)
 {
-	if (mtrx == 1)
+	if (mtrx == 0)
 		return (cabinet());
 	else 
 		return (izometric());
