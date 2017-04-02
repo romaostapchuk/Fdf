@@ -6,7 +6,7 @@
 /*   By: rostapch <rostapch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 14:21:13 by rostapch          #+#    #+#             */
-/*   Updated: 2017/04/02 18:06:25 by rostapch         ###   ########.fr       */
+/*   Updated: 2017/04/02 20:02:16 by rostapch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ double	**ft_fill_int_tab(int xy[2], char *file)
 	int		fd;
 
 	z = (double **)malloc(sizeof(double *) * xy[1]);
+	if (xy[1] <= 0 || xy[0] <= 0)
+		error_exit(4);
 	i = -1;
 	while (++i < xy[1])
 		z[i] = (double *)malloc(sizeof(double) * xy[0]);
